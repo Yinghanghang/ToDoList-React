@@ -1,19 +1,18 @@
 import React, { useState } from "react";
+import CustomItem from "./CustomItem";
 
-function App() {
-  const [inputText, setInputText] = useState("");
-  const [items, setItems] = useState([]);
+function CustomApp() {
+  const [taskName, setTaskName] = useState("");
+  const [tasks, setTasks] = useState([]);
 
-  function handleChange(event) {
-    const newValue = event.target.value;
-    setInputText(newValue);
+  function handleInputChange(event) {
+    const newTaskName = event.target.value;
+    setTaskName(newTaskName);
   }
 
-  function addItem() {
-    setItems(prevItems => {
-      return [...prevItems, inputText];
-    });
-    setInputText("");
+  function addTask() {
+    setTasks(prevTasks => [...prevTasks, taskName]);
+    setTaskName("");
   }
 
   return (
@@ -22,15 +21,15 @@ function App() {
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <input onChange={handleChange} type="text" value={inputText} />
-        <button onClick={addItem}>
+        <input onChange={handleInputChange} type="text" value={taskName} />
+        <button onClick={addTask}>
           <span>Add</span>
         </button>
       </div>
       <div>
         <ul>
-          {items.map(todoItem => (
-            <li>{todoItem}</li>
+          {tasks.map((task, index) => (
+            <CustomItem key={index} task={task} />
           ))}
         </ul>
       </div>
@@ -38,4 +37,4 @@ function App() {
   );
 }
 
-export default App;
+export default CustomApp;
